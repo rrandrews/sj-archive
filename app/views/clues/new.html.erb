@@ -1,0 +1,31 @@
+<h1>Create a clue</h1>
+<%= form_for(@clue) do |f| %>
+  <%= render 'shared/error_messages' %>
+  <!-- <%= f.fields_for :category do |cat| %>
+    <div class="form-group">
+      <%= cat.label "Existing categories" %>
+      <%= cat.select :id, Category.all, include_blank: true %>
+    </div>
+    <div class="form-group">
+      <%= cat.label "Category name:" %>
+      <%= cat.text_field :name, class: 'form-control' %>
+    </div>
+  <% end %> -->
+  <div class="form-group">
+    <%= f.label "Category" %>
+    <%= f.text_field :cat, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :clue %>
+    <%= f.text_area :clue, class: 'form-control'%>
+  </div>
+  <div class="form-group">
+    <%= f.label :response %>
+    <%= f.text_field :response, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :position %>
+    <%= f.text_field :position, class: 'form-control' %>
+  </div>
+  <%= f.submit "Create clue", class: "btn btn-primary" %>
+<% end %>
