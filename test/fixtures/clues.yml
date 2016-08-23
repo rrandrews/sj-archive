@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  column: one
+  position: 1
+  clue: MyString
+  response: MyString
+  category: one
+  is_dd: false
+
+two:
+  column: two
+  position: 1
+  clue: MyString
+  response: MyString
+  category: two
+  is_dd: false

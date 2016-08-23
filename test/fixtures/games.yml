@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  air_date: 2016-08-23
+
+two:
+  air_date: 2016-08-23
