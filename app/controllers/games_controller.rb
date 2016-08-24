@@ -9,6 +9,7 @@ class GamesController < ApplicationController
     @game.boards.build
     @game.boards.each do |board|
       6.times do
+        logger.debug "DOIN IT"
         new_column = board.columns.build
         new_column.build_category
         4.times do
@@ -16,11 +17,12 @@ class GamesController < ApplicationController
         end
       end
     end
+    logger.debug "after new: " + @game.boards.count.to_s
   end
 
   def create
     @game = Game.new(game_params)
-
+    logger.debug "BOARD COUNT: " + @game.boards.count.to_s
     if @game.save
       redirect_to @game
     else
@@ -35,14 +37,11 @@ class GamesController < ApplicationController
   private
     def game_params
       params.require(:game).permit(:title, :season, :episode, :air_date,
-        boards_attributes: [:round,
-          columns_attributes: [
-            category_attributes: [:name],
-            clues_attributes: [:position, :clue, :response]
+        boards_attributes: [:id, :round,
+          columns_attributes: [:id, :position,
+            category_attributes: [:id, :name],
+            clues_attributes: [:id, :position, :clue, :response]
           ]
-        ],
-        final_attributes: [:position, :clue, :response,
-          category_attributes: [:name]
         ]
       )
     end

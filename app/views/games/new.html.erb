@@ -49,18 +49,5 @@
     </div>
     <% board_counter += 1 %>
   <% end %>
-  <div class="form-group">
-    <%= game.fields_for :final do |final| %>
-      <%= final.fields_for :category do |category| %>
-        <%= category.label :category %>
-        <%= category.text_field :category, class: 'form-control' %>
-      <% end %>
-      <%= final.hidden_field :position, :value => -1 %>
-      <%= final.label :clue %>
-      <%= final.text_area :clue, class: 'form-control' %>
-      <%= final.label :response %>
-      <%= final.text_field :resonse, class: 'response' %>
-    <% end %>
-  </div>
   <%= game.submit "Create game", class: "btn btn-primary" %>
 <% end %>
