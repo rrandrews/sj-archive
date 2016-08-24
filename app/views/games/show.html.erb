@@ -1,0 +1,20 @@
+<% @game.boards.each do |board| %>
+<table>
+  <thead><tr>
+    <% board.columns.each do |column| %>
+      <th class="category-header"><%= column.category.name %></th>
+    <% end %>
+  </tr></thead>
+  <tbody><tr>
+    <% board.columns.each do |column| %>
+      <td>
+        <table class="column"><tbody>
+        <% column.clues.each do |clue| %>
+          <tr><td><%= clue.clue %></td></tr>
+        <% end %>
+        </tbody></table>
+      </td>
+    <% end %>
+  </tr></tbody>
+</table>
+<% end %>

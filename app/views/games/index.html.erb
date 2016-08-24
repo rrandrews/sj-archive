@@ -1,0 +1,5 @@
+<h1>Games</h1>
+<% @games.each |game| do %>
+  <span>Season: <%= game.season %> Episode: <%= game.episode %></span>
+  <span><em><%= game.title %></em></span>
+<% end %>

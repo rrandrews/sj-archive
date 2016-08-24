@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160823163342) do
+ActiveRecord::Schema.define(version: 20160824075726) do
 
   create_table "boards", force: :cascade do |t|
     t.integer  "round"
@@ -54,6 +54,9 @@ ActiveRecord::Schema.define(version: 20160823163342) do
     t.date     "air_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "season"
+    t.integer  "episode"
+    t.string   "title"
   end
 
 end

@@ -1,9 +1,6 @@
 class CluesController < ApplicationController
   def new
     @clue = Clue.new
-    #@clue.build_category
-    @category = Category.new
-    #@categories = Category.all
   end
 
   def create
