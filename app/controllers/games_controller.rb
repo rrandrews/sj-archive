@@ -40,6 +40,9 @@ class GamesController < ApplicationController
             category_attributes: [:name],
             clues_attributes: [:position, :clue, :response]
           ]
+        ],
+        final_attributes: [:position, :clue, :response,
+          category_attributes: [:name]
         ]
       )
     end
