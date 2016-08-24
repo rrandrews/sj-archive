@@ -5,8 +5,43 @@
   margin-top: 20px;
 }
 
+.board {
+  background-color: black;
+  margin-top: 20px;
+}
+
 .column {
-  display: inline;
+  margin: 0px;
+  padding: 0px;
+}
+
+.box {
+  font-size: 18pt;
+  color: white;
+  background-color: #060CE9;
+  border-radius: 2px;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-image: image-url("box-bg.jpg");
+}
+
+.category {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 20pt;
+}
+.clue {
+  font-family: serif;
+  font-size: 16pt;
+  text-transform: uppercase;
+}
+
+.text {
+  vertical-align: middle;
 }
 .main {
   width: 100%;
@@ -14,4 +49,8 @@
 
 .category-header {
   width: 200px;
+}
+
+.clear-both {
+  clear:both;
 }

@@ -1,20 +1,18 @@
 <% @game.boards.each do |board| %>
-<table>
-  <thead><tr>
-    <% board.columns.each do |column| %>
-      <th class="category-header"><%= column.category.name %></th>
-    <% end %>
-  </tr></thead>
-  <tbody><tr>
-    <% board.columns.each do |column| %>
-      <td>
-        <table class="column"><tbody>
-        <% column.clues.each do |clue| %>
-          <tr><td><%= clue.clue %></td></tr>
-        <% end %>
-        </tbody></table>
-      </td>
-    <% end %>
-  </tr></tbody>
-</table>
+  <div class="row">
+    <div class="board col-md-12">
+      <% board.columns.each do |column| %>
+        <div class="column col-md-2">
+          <div class="category box">
+            <span class="text"><%= column.category.name %></span>
+          </div>
+          <% column.clues.each do |clue| %>
+            <div class="clue box">
+              <%= clue.clue %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 <% end %>
