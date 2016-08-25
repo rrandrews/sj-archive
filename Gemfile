@@ -20,6 +20,8 @@ end
 
 group :development do  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
+  gem 'guard'
+  gem 'guard-livereload', '~> 2.5', require: false
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
