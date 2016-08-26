@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160826212843) do
+ActiveRecord::Schema.define(version: 20160826221557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20160826212843) do
     t.datetime "updated_at",  null: false
     t.boolean  "is_fj"
     t.string   "attachment"
+    t.string   "image_url"
     t.index ["category_id"], name: "index_clues_on_category_id", using: :btree
     t.index ["column_id"], name: "index_clues_on_column_id", using: :btree
   end

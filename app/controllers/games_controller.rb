@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :destroy, :new]
-  
+
   def index
     @games = Game.order(:air_date)
   end
@@ -60,10 +60,10 @@ class GamesController < ApplicationController
           columns_attributes: [:id, :position,
             category_attributes: [:id, :name],
             clues_attributes: [:id, :position, :clue, :response,
-                               :is_dd, :attachment]
+                               :is_dd, :image_url]
           ]
         ],
-        final_attributes: [:id, :is_fj, :clue, :response, :attachment,
+        final_attributes: [:id, :is_fj, :clue, :response, :image_url,
           category_attributes:[:id, :name]
         ]
       )
