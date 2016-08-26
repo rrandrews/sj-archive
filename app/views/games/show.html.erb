@@ -12,7 +12,8 @@
     <tbody>
       <% (0...board.columns[0].clues.length).each do |i| %>
         <tr><% board.columns.each do |column| %>
-          <% clue = column.clues[i] %>
+          <% clues = column.clues.order(:position) %>
+          <% clue = clues[i] %>
           <td class="clue box">
             <span class="clue">
               <%= clue.clue %>
