@@ -1,6 +1,13 @@
 <div class="container">
   <h1><%= @game.title %></h1>
   <h3><%= @game.air_date %></h3>
+  <h4>
+    <%= link_to "Return to Index", games_path %>
+    <%= link_to "Edit", edit_game_path(@game) %>
+    <%= link_to "Delete", game_path(@game), method: :delete,
+                                            data: {confirm: "Are you sure?"}%>
+  </h4>
+
   <% @game.boards.each do |board| %>
     <table class="board"><thead><tr>
       <% board.columns.each do |column| %>
@@ -18,7 +25,7 @@
             <span class="clue">
               <%= clue.clue %>
               <% if !clue.attachment.blank? %>
-                <a href="#" class="image-link" data-link="
+                <a href="#/" class="image-link" data-link="
                   <%= clue.attachment.url %>">
                   <i class="fa fa-picture-o" aria-hidden="true"></i>
                 </a>

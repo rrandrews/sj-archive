@@ -29,8 +29,26 @@ class GamesController < ApplicationController
     end
   end
 
+  def edit
+   @game = Game.find(params[:id])
+  end
+
+  def update
+    @game = Game.find(params[:id])
+    if @game.update(game_params)
+      redirect_to @game
+    else
+      render 'edit'
+    end
+  end
+
   def show
     @game = Game.find(params[:id])
+  end
+
+  def destroy
+    Game.find(params[:id]).destroy
+    redirect_to games_url
   end
 
   private
@@ -43,7 +61,7 @@ class GamesController < ApplicationController
                                :is_dd, :attachment]
           ]
         ],
-        final_attributes: [:is_fj, :clue, :response,
+        final_attributes: [:id, :is_fj, :clue, :response, :attachment,
           category_attributes:[:id, :name]
         ]
       )
