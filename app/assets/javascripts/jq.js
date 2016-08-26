@@ -24,6 +24,6 @@ $(document).ready(function(){
 
   $('.modal-content').click(function() {
     $('.modal').css('display', 'none');
-  })
+  });
 
 })
