@@ -5,4 +5,5 @@ class Game < ApplicationRecord
   accepts_nested_attributes_for :final
 
   validates :title, presence: true
+
 end

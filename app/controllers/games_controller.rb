@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  before_action :authenticate_user!, only: [:edit, :destroy, :new]
+  
   def index
     @games = Game.order(:air_date)
   end
