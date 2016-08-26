@@ -39,7 +39,8 @@ class GamesController < ApplicationController
         boards_attributes: [:id, :round,
           columns_attributes: [:id, :position,
             category_attributes: [:id, :name],
-            clues_attributes: [:id, :position, :clue, :response, :is_dd]
+            clues_attributes: [:id, :position, :clue, :response,
+                               :is_dd, :attachment]
           ]
         ],
         final_attributes: [:is_fj, :clue, :response,

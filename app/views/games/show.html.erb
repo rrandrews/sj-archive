@@ -4,21 +4,28 @@
   <% @game.boards.each do |board| %>
     <table class="board"><thead><tr>
       <% board.columns.each do |column| %>
-      <% logger.debug "Column id (category): " + column.id.to_s %>
-      <% logger.debug "CATEGORY: " + column.category.name %>
-      <th class="category box"><%= column.category.name %></th>
+        <% logger.debug "Column id (category): " + column.id.to_s %>
+        <% logger.debug "CATEGORY: " + column.category.name %>
+        <th class="category box"><%= column.category.name %></th>
       <% end %>
     </tr></head>
     <tbody>
       <% (0...board.columns[0].clues.length).each do |i| %>
-        <tr>
-          <% board.columns.each do |column| %>
-            <td class="clue box">
-              <span class="clue"><%= column.clues[i].clue %></span>
-              <span class="response hidden"><%= column.clues[i].response %></span>
-            </td>
-          <% end %>
-        </tr>
+        <tr><% board.columns.each do |column| %>
+          <% clue = column.clues[i] %>
+          <td class="clue box">
+            <span class="clue">
+              <%= clue.clue %>
+              <% if !clue.attachment.blank? %>
+                <a href="#" class="image-link" data-link="
+                  <%= clue.attachment.url %>">
+                  <i class="fa fa-picture-o" aria-hidden="true"></i>
+                </a>
+              <% end %>
+            </span>
+            <span class="response hidden"><%= clue.response %></span>
+          </td>
+        <% end %></tr>
       <% end %>
     </table>
     <div class="seperator"></div>
@@ -33,4 +40,9 @@
     </td></tbody>
   </table>
   <div class="seperator"></div>
+</div>
+<div class="modal clue-image">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
 </div>
