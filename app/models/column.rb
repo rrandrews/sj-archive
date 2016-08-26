@@ -1,7 +1,7 @@
 class Column < ApplicationRecord
   belongs_to :board, optional: true
   belongs_to :category, optional: true, autosave: true
-  has_many :clues, dependent: :destroy
+  has_many :clues, -> {order(:position)}, dependent: :destroy
   accepts_nested_attributes_for :category
   accepts_nested_attributes_for :clues
 

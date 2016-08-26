@@ -15,10 +15,14 @@
   <% board_counter = 1 %>
   <%= game.fields_for :boards do |board| %>
     <div class="edit-board well">
-      <%= board.hidden_field :round, :value => board_counter %>
+      <% if @game.new_record? %>
+        <%= board.hidden_field :round, :value => board_counter %>
+      <% end %>
       <% column_counter = 1 %>
       <%= board.fields_for :columns do |column| %>
-        <%= column.hidden_field :position, :value => column_counter %>
+        <% if @game.new_record? %>
+          <%= column.hidden_field :position, :value => column_counter %>
+        <% end %>
         <%= column.fields_for :category do |category| %>
         <table class="edit-column"><thead><tr><th>
           <div class="form-group">
@@ -32,7 +36,9 @@
           <%= column.fields_for :clues do |clue| %>
           <tr><td>
             <div class="form-group">
-              <%= clue.hidden_field :position, :value => clue_counter %>
+              <% if @game.new_record? %>
+                <%= clue.hidden_field :position, :value => clue_counter %>
+              <% end %>
               <%= clue.label :clue %>
               <%= clue.text_area :clue, class: 'form-control'%>
             </div>
