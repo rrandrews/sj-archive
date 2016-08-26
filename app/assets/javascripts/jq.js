@@ -1,29 +1,27 @@
-$(document).ready(function(){
+$(document).on('turbolinks:load', function() {
+    $('.clue.box').click(function() {
+      $(this).children().toggleClass('hidden');
+    });
 
-  $('.clue.box').click(function() {
-    $(this).children().toggleClass('hidden');
-  });
+    $('.link-attachment').click(function(event) {
+      $(this).parent().parent().children(".attachment").toggleClass('hidden');
+    });
 
-  $('.link-attachment').click(function(event) {
-    $(this).parent().parent().children(".attachment").toggleClass('hidden');
-  });
-
-  $('.image-link').click(function(event) {
-    img = $(this).data('link');
-    $('.modal').css('display', 'block');
-    $('.modal-content').attr("src", img);
-    $('.caption').text($(this).parent().text());
-    //event.preventDefault();
-    return false;
-  });
+    $('.image-link').click(function(event) {
+      img = $(this).data('link');
+      $('.modal').css('display', 'block');
+      $('.modal-content').attr("src", img);
+      $('.caption').text($(this).parent().text());
+      //event.preventDefault();
+      return false;
+    });
 
 
-  $('.close').click(function(event) {
-    $('.modal').css('display', 'none');
-  });
+    $('.close').click(function(event) {
+      $('.modal').css('display', 'none');
+    });
 
-  $('.modal-content').click(function() {
-    $('.modal').css('display', 'none');
-  });
-
-})
+    $('.modal-content').click(function() {
+      $('.modal').css('display', 'none');
+    });
+});
