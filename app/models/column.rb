@@ -1,7 +1,7 @@
 class Column < ApplicationRecord
   belongs_to :board, optional: true
-  has_many :clues
   belongs_to :category, optional: true, autosave: true
+  has_many :clues
   accepts_nested_attributes_for :category
   accepts_nested_attributes_for :clues
 

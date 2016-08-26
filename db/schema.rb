@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160824131545) do
+ActiveRecord::Schema.define(version: 20160826022943) do
 
   create_table "boards", force: :cascade do |t|
     t.integer  "round"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20160824131545) do
     t.boolean  "is_dd"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.boolean  "is_fj"
     t.index ["category_id"], name: "index_clues_on_category_id"
     t.index ["column_id"], name: "index_clues_on_column_id"
   end
@@ -57,6 +58,8 @@ ActiveRecord::Schema.define(version: 20160824131545) do
     t.integer  "season"
     t.integer  "episode"
     t.string   "title"
+    t.integer  "final_id"
+    t.index ["final_id"], name: "index_games_on_final_id"
   end
 
 end

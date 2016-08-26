@@ -1,7 +1,8 @@
-<% @game.boards.each do |board| %>
-  <div class="container">
+<div class="container">
+  <% @game.boards.each do |board| %>
     <table class="board"><thead><tr>
       <% board.columns.each do |column| %>
+      <% logger.debug "Column id (category): " + column.id.to_s %>
       <th class="category box"><%= column.category.name %></th>
       <% end %>
     </tr></head>
@@ -9,11 +10,23 @@
       <% (0...board.columns[0].clues.length).each do |i| %>
         <tr>
           <% board.columns.each do |column| %>
-            <td class="clue box"><%= column.clues[i].clue %></td>
+            <td class="clue box">
+              <span class="clue"><%= column.clues[i].clue %></span>
+              <span class="response hidden"><%= column.clues[i].response %></span>
+            </td>
           <% end %>
         </tr>
       <% end %>
     </table>
     <div class="seperator"></div>
-  </div>
-<% end %>
+  <% end %>
+  <table class="final">
+    <thead><th class="category box final">
+      <%= @game.final.category %>
+    </th></thead>
+    <tbody><td class="clue box final">
+      <span class="clue"><%= @game.final.clue %></span>
+      <span class="response hidden"><%= @game.final.response %></span>
+    </td></tbody>
+  </table>
+</div>
