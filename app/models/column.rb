@@ -12,5 +12,4 @@ class Column < ApplicationRecord
       self.category.save!
     end
   end
-
 end
