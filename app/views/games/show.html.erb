@@ -1,4 +1,6 @@
 <div class="container">
+  <h1><%= @game.title %></h1>
+  <h3><%= @game.air_date %></h3>
   <% @game.boards.each do |board| %>
     <table class="board"><thead><tr>
       <% board.columns.each do |column| %>
@@ -30,4 +32,5 @@
       <span class="response hidden"><%= @game.final.response %></span>
     </td></tbody>
   </table>
+  <div class="seperator"></div>
 </div>

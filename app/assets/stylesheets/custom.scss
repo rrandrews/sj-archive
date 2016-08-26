@@ -2,7 +2,7 @@
 @import "bootstrap";
 
 body {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 .debug_dump {
   margin-top: 20px;
@@ -13,6 +13,7 @@ body {
   table-layout: fixed;
   //width: 1320px;
   display: block;
+  margin-top: 20px;
   border-collapse: collapse;
   border-radius: 4px;
 }
@@ -44,12 +45,16 @@ body {
 .category {
   font-family: sans-serif;
   font-weight: bold;
-  font-size: 20pt;
+  font-size: 16pt;
 }
 .clue {
   font-family: serif;
   font-size: 14pt;
   //text-transform: uppercase;
+}
+
+.response {
+  color: yellow;
 }
 
 .text {
