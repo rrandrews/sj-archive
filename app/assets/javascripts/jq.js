@@ -5,6 +5,7 @@ $(document).on('turbolinks:load', function() {
 
     $('.link-attachment').click(function(event) {
       $(this).parent().parent().children(".attachment").toggleClass('hidden');
+      event.preventDefault();
     });
 
     $('.image-link').click(function(event) {
