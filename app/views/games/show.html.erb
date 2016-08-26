@@ -3,6 +3,7 @@
     <table class="board"><thead><tr>
       <% board.columns.each do |column| %>
       <% logger.debug "Column id (category): " + column.id.to_s %>
+      <% logger.debug "CATEGORY: " + column.category.name %>
       <th class="category box"><%= column.category.name %></th>
       <% end %>
     </tr></head>

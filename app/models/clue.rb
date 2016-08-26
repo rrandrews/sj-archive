@@ -9,6 +9,7 @@ class Clue < ApplicationRecord
         self.category = new_category
       else
         self.category.save!
+        self.save!
       end
     end
   end
