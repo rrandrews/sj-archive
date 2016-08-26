@@ -1,5 +1,12 @@
-<h1>Games</h1>
-<% @games.each |game| do %>
-  <span>Season: <%= game.season %> Episode: <%= game.episode %></span>
-  <span><em><%= game.title %></em></span>
-<% end %>
+<div class="container games-index">
+  <h1>Games</h1>
+  <div class="list-group">
+    <% @games.each do |game| %>
+      <%= link_to game_path(game),
+        class: 'list-group-item list-group-item-action' do %>
+        S<%= game.season %>E<%=game.episode%><%= game.title %>
+        <span class="pull-right"><%= game.air_date %></span>
+      <% end %>
+    <% end %>
+  </div>
+</div>
