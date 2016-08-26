@@ -12,19 +12,22 @@
 
 ActiveRecord::Schema.define(version: 20160826022943) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "boards", force: :cascade do |t|
     t.integer  "round"
     t.integer  "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_boards_on_game_id"
+    t.index ["game_id"], name: "index_boards_on_game_id", using: :btree
   end
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_categories_on_name", unique: true
+    t.index ["name"], name: "index_categories_on_name", unique: true, using: :btree
   end
 
   create_table "clues", force: :cascade do |t|
@@ -37,8 +40,8 @@ ActiveRecord::Schema.define(version: 20160826022943) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.boolean  "is_fj"
-    t.index ["category_id"], name: "index_clues_on_category_id"
-    t.index ["column_id"], name: "index_clues_on_column_id"
+    t.index ["category_id"], name: "index_clues_on_category_id", using: :btree
+    t.index ["column_id"], name: "index_clues_on_column_id", using: :btree
   end
 
   create_table "columns", force: :cascade do |t|
@@ -47,8 +50,8 @@ ActiveRecord::Schema.define(version: 20160826022943) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "category_id"
-    t.index ["board_id"], name: "index_columns_on_board_id"
-    t.index ["category_id"], name: "index_columns_on_category_id"
+    t.index ["board_id"], name: "index_columns_on_board_id", using: :btree
+    t.index ["category_id"], name: "index_columns_on_category_id", using: :btree
   end
 
   create_table "games", force: :cascade do |t|
@@ -59,7 +62,7 @@ ActiveRecord::Schema.define(version: 20160826022943) do
     t.integer  "episode"
     t.string   "title"
     t.integer  "final_id"
-    t.index ["final_id"], name: "index_games_on_final_id"
+    t.index ["final_id"], name: "index_games_on_final_id", using: :btree
   end
 
 end
