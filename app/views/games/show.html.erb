@@ -1,13 +1,11 @@
 <div class="container">
-  <h1><%= @game.title %></h1>
   <h3><%= @game.air_date %></h3>
-  <h4>
-    <%= link_to "Return to Index", games_path %>
-    <%= link_to "Edit", edit_game_path(@game) %>
+  <span class="h1"><%= @game.title %>
+    <%= link_to "Index", games_path, class: "h4 link" %>
+    <%= link_to "Edit", edit_game_path(@game), class: "h4 link" %>
     <%= link_to "Delete", game_path(@game), method: :delete,
-                                            data: {confirm: "Are you sure?"}%>
-  </h4>
-
+                        data: {confirm: "Are you sure?"}, class: "h4 link" %>
+  </span>
   <% @game.boards.each do |board| %>
     <table class="board"><thead><tr>
       <% board.columns.each do |column| %>

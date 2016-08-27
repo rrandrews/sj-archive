@@ -1,6 +1,8 @@
 <div class="container fixed-width">
   <header>
-    <h1>Clue Search</h1>
+    <span class="h1">Clue Search
+      <%= link_to "Index", games_path, class: "h4 link" %>
+    </span>
   </header>
   <section class="search-form">
     <%= form_for :clues, method: :get do |f| %>

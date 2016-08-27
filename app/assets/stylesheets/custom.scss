@@ -40,21 +40,28 @@ body {
   background-color: #060CE9;
   padding: 4px;
   width: 220px;
-  height: 150px;
+  //height: 150px;
   max-width: 220px;
   overflow: hidden;
   text-align: center;
   border: 3px solid black;
 }
 
+.games-list {
+  margin-top: 5px;
+}
+.link {
+  color: #337ab7;
+}
 .category {
   font-family: sans-serif;
   font-weight: bold;
   font-size: 16pt;
 }
-.clue {
+.clue.box {
   font-family: serif;
   font-size: 14pt;
+  height: 150px;
 }
 
 .response-results {
