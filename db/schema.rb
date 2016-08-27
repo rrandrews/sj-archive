@@ -84,4 +84,10 @@ ActiveRecord::Schema.define(version: 20160826221557) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "boards", "games"
+  add_foreign_key "clues", "categories"
+  add_foreign_key "clues", "columns"
+  add_foreign_key "columns", "boards"
+  add_foreign_key "columns", "categories"
+  add_foreign_key "games", "clues", column: "final_id"
 end

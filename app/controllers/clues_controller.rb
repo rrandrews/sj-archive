@@ -3,6 +3,17 @@ class CluesController < ApplicationController
     @clue = Clue.new
   end
 
+  def index
+    if params[:keywords].present?
+      keywords = "%" + params[:keywords].downcase + "%"
+      @clues = Clue.where("lower(response) LIKE ? OR " +
+                          "lower(clue) LIKE ?",
+                          keywords, keywords)
+    else
+      @clues = []
+    end
+  end
+
   def create
 
     @clue = Clue.new(clue_params)

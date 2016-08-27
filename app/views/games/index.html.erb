@@ -1,9 +1,21 @@
-<div class="container games-index">
+
+<div class="container fixed-width">
+    <section class="search-form">
+      <%= form_for :clues, url: clues_path, method: :get do |f| %>
+        <div class="input-group">
+          <%= label_tag :keywords, nil, class: "sr-only" %>
+          <%= text_field_tag :keywords, nil, class: "form-control search-sm pull-right" %>
+          <span class="input-group-btn">
+            <%= submit_tag "Search", class: "btn btn-primary pull-right" %>
+          </span>
+        </div>
+      <% end %>
+    </section>
   <h1>Games</h1>
   <div class="list-group">
     <% @games.each do |game| %>
       <%= link_to game_path(game),
-        class: 'list-group-item list-group-item-action' do %>
+        class: 'list-group-item list-group-item-action' do%>
         S<%= game.season %>E<%=game.episode%> <%= game.title %>
         <span class="pull-right"><%= game.air_date %></span>
       <% end %>

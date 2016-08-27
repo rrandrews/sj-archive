@@ -1,0 +1,47 @@
+<div class="container fixed-width">
+  <header>
+    <h1>Clue Search</h1>
+  </header>
+  <section class="search-form">
+    <%= form_for :clues, method: :get do |f| %>
+      <div class="input-group input-group-lg">
+        <%= label_tag :keywords, nil, class: "sr-only" %>
+        <%= text_field_tag :keywords, nil, class: "form-control input-lg" %>
+        <span class="input-group-btn">
+          <%= submit_tag "Find Clues", class: "btn btn-primary btn-lg" %>
+        </span>
+      </div>
+    <% end %>
+  </section>
+  <section class="search-results">
+    <div class="list-group">
+      <% @clues.each do |clue| %>
+        <% if clue.is_fj %>
+          <% category = clue.category %>
+          <% game = Game.find_by final: clue %>
+          <% value = "Final" %>
+        <% else %>
+          <% category = clue.column.category %>
+          <% game = clue.column.board.game %>
+          <% value = clue.position * 250 * clue.column.board.round %>
+        <% end %>
+        <div class='list-group-item list-group-item-action'>
+          <h4>
+            <%= category.name %>
+            <span class="value"><%= value %></span>
+            <span class="pull-right">
+              <%= link_to game.air_date.to_s, game_path(game) %>
+            </span>
+          </h4>
+          <span class="clue-result">
+            <%= clue.clue %>
+            <a href="#/" class="show-response">
+              <i class="fa fa-chevron-circle-right"></i>
+            </a>
+            <span class='response-results hidden'><%= clue.response %></span>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</div>

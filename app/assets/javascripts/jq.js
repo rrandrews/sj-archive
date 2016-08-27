@@ -8,6 +8,10 @@ $(document).on('turbolinks:load', function() {
       event.preventDefault();
     });
 
+    $('.show-response').click(function(event) {
+      $(this).next().toggleClass('hidden');
+      event.preventDefault();
+    })
     $('.image-link').click(function(event) {
       img = $(this).data('link');
       $('.modal').css('display', 'block');
