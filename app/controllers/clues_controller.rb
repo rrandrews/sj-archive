@@ -6,9 +6,10 @@ class CluesController < ApplicationController
   def index
     if params[:keywords].present?
       keywords = "%" + params[:keywords].downcase + "%"
-      @clues = Clue.where("lower(response) LIKE ? OR " +
-                          "lower(clue) LIKE ?",
-                          keywords, keywords)
+      @clues = Clue.joins(:category).where("lower(response) LIKE ? OR " +
+                                           "lower(clue) LIKE ? OR " +
+                                           "lower(name) LIKE ?",
+                                           keywords, keywords, keywords)
     else
       @clues = []
     end

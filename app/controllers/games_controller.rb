@@ -24,6 +24,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(game_params)
+    set_clue_categories
     if @game.save
       redirect_to @game
     else
@@ -37,6 +38,8 @@ class GamesController < ApplicationController
 
   def update
     @game = Game.find(params[:id])
+    set_clue_categories
+
     if @game.update(game_params)
       redirect_to @game
     else
@@ -67,5 +70,15 @@ class GamesController < ApplicationController
           category_attributes:[:id, :name]
         ]
       )
+    end
+
+    def set_clue_categories
+      @game.boards.each do |board|
+        board.columns.each do |column|
+          column.clues.each do |clue|
+            clue.category = column.category
+          end
+        end
+      end
     end
 end
