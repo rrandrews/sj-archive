@@ -9,8 +9,6 @@
   <% @game.boards.each do |board| %>
     <table class="board"><thead><tr>
       <% board.columns.each do |column| %>
-        <% logger.debug "Column id (category): " + column.id.to_s %>
-        <% logger.debug "CATEGORY: " + column.category.name %>
         <th class="category box"><%= column.category.name %></th>
       <% end %>
     </tr></head>
@@ -20,16 +18,23 @@
           <% clues = column.clues.order(:position) %>
           <% clue = clues[i] %>
           <td class="clue box">
-            <span class="clue">
-              <%= clue.clue %>
-              <% if !clue.image_url.blank? %>
-                <a href="#/" class="image-link" data-link="
-                  <%= clue.image_url %>">
-                  <i class="fa fa-picture-o" aria-hidden="true"></i>
-                </a>
-              <% end %>
-            </span>
-            <span class="response hidden"><%= clue.response %></span>
+            <table class="clue-table">
+              <thead><tr><th class="clue-header">
+                <%= clue_value(clue) %>
+              </th></tr></thead>
+              <tbody><tr><td class="clue-body">
+                <span class="clue">
+                  <%= clue.clue %>
+                  <% if !clue.image_url.blank? %>
+                    <a href="#/" class="image-link" data-link="
+                      <%= clue.image_url %>">
+                      <i class="fa fa-picture-o" aria-hidden="true"></i>
+                    </a>
+                  <% end %>
+                </span>
+                <span class="response hidden"><%= clue.response %></span>
+              </td></tr></tbody>
+            </table>
           </td>
         <% end %></tr>
       <% end %>
@@ -41,8 +46,20 @@
       <%= @game.final.category %>
     </th></thead>
     <tbody><td class="clue box final">
-      <span class="clue"><%= @game.final.clue %></span>
-      <span class="response hidden"><%= @game.final.response %></span>
+      <table class="clue-table">
+        <tbody><tr><td class="clue-body">
+          <span class="clue">
+            <%= @game.final.clue %>
+            <% if !@game.final.image_url.blank? %>
+              <a href="#/" class="image-link" data-link="
+                <%= clue.image_url %>">
+                <i class="fa fa-picture-o" aria-hidden="true"></i>
+              </a>
+            <% end %>
+          </span>
+          <span class="response hidden"><%= @game.final.response %></span>
+        </td></tr></tbody>
+      </table>
     </td></tbody>
   </table>
   <div class="seperator"></div>

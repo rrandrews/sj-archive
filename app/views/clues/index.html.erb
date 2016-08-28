@@ -18,19 +18,12 @@
   <section class="search-results">
     <div class="list-group">
       <% @clues.each do |clue| %>
-        <% if clue.is_fj %>
-          <% category = clue.category %>
-          <% game = Game.find_by final: clue %>
-          <% value = "Final" %>
-        <% else %>
-          <% category = clue.column.category %>
-          <% game = clue.column.board.game %>
-          <% value = clue.position * 250 * clue.column.board.round %>
-        <% end %>
+        <% game = clue.is_fj ? Game.find_by(final: clue) : clue.column.board.game %>
+      
         <div class='list-group-item list-group-item-action'>
           <h4>
-            <%= category.name %>
-            <span class="value"><%= value %></span>
+            <%= clue.category.name %>
+            <span class="value"><%= clue_value(clue) %></span>
             <span class="pull-right">
               <%= link_to game.air_date.to_s, game_path(game) %>
             </span>

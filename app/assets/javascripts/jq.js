@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function() {
     $('.clue.box').click(function() {
-      $(this).children().toggleClass('hidden');
+      $(this).find(".clue-body").children().toggleClass('hidden');
     });
 
     $('.link-attachment').click(function(event) {
