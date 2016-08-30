@@ -1,0 +1,35 @@
+<div id="new-contestant" class="modal fade" role="dialog" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Create a contestant</h4>
+      </div>
+      <div class="modal-body">
+        <div class="input-group">
+          <label for="first_name">First name</label>
+          <input type="text" name="first_name" class="form-control"
+                 ng-model="first_name">
+        </div>
+        <div class="input-group">
+          <label for="last_name">Last name</label>
+          <input type="text" name="last_name" class="form-control"
+                 ng-model="last_name">
+        </div>
+        <div class="seperator"></div>
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="button"
+                  ng-click="add(first_name, last_name)">
+            Create Contestant
+          </button>
+        </span>
+        <span class="notification" ng-if="status">{{status}}</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

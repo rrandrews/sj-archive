@@ -31,10 +31,20 @@ body {
   display: block;
 }
 
+.striped {
+  background-color: grey;
+}
+
 .edit-column {
   display: inline;
 }
+.inline-block {
+  display: inline-block;
+}
 
+.input-narrow {
+  width: 40px;
+}
 .box {
   color: white;
   background-color: #060CE9;
@@ -87,6 +97,10 @@ body {
   color: #5cb85c;
 }
 
+.edit-box {
+  border-bottom: 2px solid grey;
+}
+
 .response {
   color: rgb(101, 255, 0);
 }
@@ -111,7 +125,7 @@ body {
 }
 
 .fixed-width {
-  width: 800px;
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -138,4 +152,8 @@ body {
   width: 300px;
   max-width: 300px;
   display: inline;
+}
+
+#new-contestant {
+  z-index: 1500;
 }

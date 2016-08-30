@@ -3,8 +3,13 @@ $(document).on('turbolinks:load', function() {
       $(this).find(".clue-body").children().toggleClass('hidden');
     });
 
-    $('.link-attachment').click(function(event) {
-      $(this).parent().parent().children(".attachment").toggleClass('hidden');
+    var toggleHidden = function(target) {
+      alert(target);
+    };
+
+    $('.toggle-hidden').click(function(event) {
+      target = "." + $(this).data("target");
+      $(this).parent().parent().children(target).toggleClass('hidden');
       event.preventDefault();
     });
 
@@ -12,21 +17,10 @@ $(document).on('turbolinks:load', function() {
       $(this).next().toggleClass('hidden');
       event.preventDefault();
     })
-    $('.image-link').click(function(event) {
-      img = $(this).data('link');
-      $('.modal').css('display', 'block');
-      $('.modal-content').attr("src", img);
-      $('.caption').text($(this).parent().text());
-      //event.preventDefault();
-      return false;
-    });
 
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    }); 
 
-    $('.close').click(function(event) {
-      $('.modal').css('display', 'none');
-    });
-
-    $('.modal-content').click(function() {
-      $('.modal').css('display', 'none');
-    });
 });

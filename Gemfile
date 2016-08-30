@@ -8,13 +8,15 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
-gem 'turbolinks', '~> 5'
+gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.5'
 gem 'pg'
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3'
-gem 'jquery-turbolinks'
 gem 'devise'
+gem 'bower-rails'
+gem 'ng-rails-csrf'
+gem 'turbolinks', '~> 5'
 
 group :development, :test do
 # Call 'byebug' anywhere in the code to stop execution and get a debugger console

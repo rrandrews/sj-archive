@@ -1,0 +1,47 @@
+<div class="container fixed-width">
+  <header>
+    <span class="h1">Clue Search
+      <%= link_to "Index", episodes_path, class: "h4 link" %>
+    </span>
+  </header>
+  <article ng-app="clues" ng-controller="ClueSearchController">
+    <section class="search-form">
+      <form>
+        <div class="input-group input-group-lg">
+          <label for="keywords" class="sr-only">Keywords</label>
+          <input type="text" name="keywords" class="form-control input-lg"
+                 ng-model="keywords">
+          <span class="input-group-btn">
+            <button class="btn btn-primary btn-lg" type="button" ng-click="search(keywords)">
+              Search
+            </button>
+          </span>
+        </div>
+      </form>
+      <h1 class="searchedFor" ng-if="searchedFor">
+        <small>Searched for:</small> {{searchedFor}}
+      </h1>
+    </section>
+    <section class="search-results">
+      <div class="list-group">
+        <div class='list-group-item list-group-item-action'
+             ng-repeat="clue in clues">>
+          <h4>
+            {{ clue.category_name }}
+            <span class="value">{{ clue.value }}</span>
+            <span class="pull-right">
+              <%= link_to {{ clue.episode_date }}, episode_path(episode) %>
+            </span>
+          </h4>
+          <span class="clue-result">
+            {{ clue.clue }}
+            <a href="#/" class="show-response">
+              <i class="fa fa-chevron-circle-right"></i>
+            </a>
+            <span class='response-results hidden'>{{ clue.response }}</span>
+          </span>
+        </div>
+      </div>
+    </section>
+  </article>
+</div>

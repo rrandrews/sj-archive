@@ -46,6 +46,7 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bower-rails (0.10.0)
     builder (3.2.2)
     byebug (9.0.5)
     carrierwave (0.10.0)
@@ -127,6 +128,7 @@ GEM
     minitest (5.9.0)
     multi_json (1.12.1)
     nenv (0.3.0)
+    ng-rails-csrf (0.1.0)
     nio4r (1.2.1)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
@@ -224,6 +226,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass
+  bower-rails
   byebug
   carrierwave (~> 0.10.0)
   coffee-rails (~> 4.2)
@@ -234,6 +237,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   mini_magick (~> 4.3)
+  ng-rails-csrf
   pg
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)

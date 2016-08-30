@@ -1,0 +1,69 @@
+<div class="container">
+  <h3><%= @episode.air_date %></h3>
+  <span class="h1"><%= @episode.title %>
+    <%= link_to "Index", episodes_path, class: "h4 link" %>
+    <%= link_to "Edit", edit_episode_path(@episode), class: "h4 link" %>
+    <%= link_to "Delete", episode_path(@episode), method: :delete,
+                        data: {confirm: "Are you sure?"}, class: "h4 link" %>
+  </span>
+  <% @episode.boards.each do |board| %>
+    <table class="board"><thead><tr>
+      <% board.columns.each do |column| %>
+        <th class="category box"><%= column.category.name %></th>
+      <% end %>
+    </tr></head>
+    <tbody>
+      <% (0...board.columns[0].clues.length).each do |i| %>
+        <tr><% board.columns.each do |column| %>
+          <% clues = column.clues.order(:position) %>
+          <% clue = clues[i] %>
+          <td class="clue box">
+            <table class="clue-table">
+              <thead><tr><th class="clue-header">
+                <%= clue_value(clue) %>
+              </th></tr></thead>
+              <tbody><tr><td class="clue-body">
+                <span class="clue">
+                  <%= clue.clue %>
+                  <% if !clue.image_url.blank? %>
+                    <a href="<%= clue.image_url %>" data-toggle="lightbox">
+                      <i class="fa fa-picture-o" aria-hidden="true"></i>
+                    </a>
+                  <% end %>
+                </span>
+                <span class="response hidden"><%= clue.correct_response %></span>
+              </td></tr></tbody>
+            </table>
+          </td>
+        <% end %></tr>
+      <% end %>
+    </table>
+    <div class="seperator"></div>
+  <% end %>
+  <table class="final">
+    <thead><th class="category box final">
+      <%= @episode.final.category %>
+    </th></thead>
+    <tbody><td class="clue box final">
+      <table class="clue-table">
+        <tbody><tr><td class="clue-body">
+          <span class="clue">
+            <%= @episode.final.clue %>
+            <% if !@episode.final.image_url.blank? %>
+                <button type="button" class="btn btn-info" data-toggle="modal"
+                        data-target="#image">
+                  <i class="fa fa-picture-o" aria-hidden="true"></i>
+                </button>
+              <!-- <a href="#/" class="btn btn-lg btn-success" data-toggle="modal"
+              data-link="<%#= clue.image_url %>" data-target="#image">
+                <i class="fa fa-picture-o" aria-hidden="true"></i>
+              </a> -->
+            <% end %>
+          </span>
+          <span class="response hidden"><%= @episode.final.correct_response %></span>
+        </td></tr></tbody>
+      </table>
+    </td></tbody>
+  </table>
+  <div class="seperator"></div>
+</div>

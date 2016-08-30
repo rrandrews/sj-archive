@@ -1,0 +1,19 @@
+
+<div class="container fixed-width">
+  <%= render partial: 'search' %>
+  <span class="h1">Episodes
+    <%= link_to "New", new_episode_path, class: "h4 link" %>
+  </span>
+  <div class="episodes-list">
+    <div class="list-group">
+      <% @episodes.each do |episode| %>
+        <%= link_to episode_path(episode),
+          class: 'list-group-item list-group-item-action' do%>
+          S<%= episode.season %>E<%= leading_zero(episode.episode)%>
+          <%= episode.title %>
+          <span class="pull-right"><%= episode.air_date %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

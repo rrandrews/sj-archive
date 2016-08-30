@@ -1,7 +1,7 @@
 <div class="container fixed-width">
   <header>
     <span class="h1">Clue Search
-      <%= link_to "Index", games_path, class: "h4 link" %>
+      <%= link_to "Index", episodes_path, class: "h4 link" %>
     </span>
   </header>
   <section class="search-form">
@@ -18,14 +18,12 @@
   <section class="search-results">
     <div class="list-group">
       <% @clues.each do |clue| %>
-        <% game = clue.is_fj ? Game.find_by(final: clue) : clue.column.board.game %>
-      
         <div class='list-group-item list-group-item-action'>
           <h4>
             <%= clue.category.name %>
-            <span class="value"><%= clue_value(clue) %></span>
+            <span class="value"><%= clue.value %></span>
             <span class="pull-right">
-              <%= link_to game.air_date.to_s, game_path(game) %>
+              <%= link_to clue.episode.air_date.to_s, episode_path(clue.episode) %>
             </span>
           </h4>
           <span class="clue-result">
@@ -33,7 +31,7 @@
             <a href="#/" class="show-response">
               <i class="fa fa-chevron-circle-right"></i>
             </a>
-            <span class='response-results hidden'><%= clue.response %></span>
+            <span class='response-results hidden'><%= clue.correct_response %></span>
           </span>
         </div>
       <% end %>
