@@ -1,11 +1,14 @@
-function EpisodeFactory($resource) {
-  var Episode = $resource('/episodes/:id.json');
-  return Episode;
-}
+// function EpisodeFactory($resource) {
+//   var Episode = $resource('/episodes/:id.json');
+//   return Episode;
+// }
 
 //var jq = $.noConflict();
 var app = angular.module('episodeForm', ['ngResource', 'ng-rails-csrf'])
-                        .factory('Episode', EpisodeFactory);
+                        .factory('Episode', function ($resource) {
+                          var Episode = $resource('/episodes/:id.json');
+                          return Episode;
+                        });
 
 
 app.controller("episodeFormController", [
