@@ -5,10 +5,10 @@
 
 //var jq = $.noConflict();
 var app = angular.module('episodeForm', ['ngResource', 'ng-rails-csrf'])
-                        .factory('Episode', function ($resource) {
+                        .factory('Episode', ['$resource', function ($resource) {
                           var Episode = $resource('/episodes/:id.json');
                           return Episode;
-                        });
+                        }]);
 
 
 app.controller("episodeFormController", [
