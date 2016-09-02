@@ -10,13 +10,13 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require ekko-lightbox
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require ekko-lightbox
 //= require angular
 //= require angular-resource
 //= require ng-rails-csrf
+//= require nested_form_fields
+//= require angular-keep-values
 //= require_tree .
-//= require turbolinks

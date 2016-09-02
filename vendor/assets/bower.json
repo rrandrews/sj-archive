@@ -3,6 +3,7 @@
   "dependencies": {
     "angular": "~> 1.5",
     "angular-resource": "latest",
+    "angular-keep-values": "latest",
     "ekko-lightbox": "latest"
   },
   "resolutions": {

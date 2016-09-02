@@ -8,9 +8,9 @@ class EpisodesController < ApplicationController
   def new
     @contestants = Contestant.all
     @episode = Episode.new
-    # 3.times do
-    #   @episode.appearances.build
-    # end
+    3.times do
+      @episode.appearances.build
+    end
     @episode.build_final
     3.times do
       @episode.final.responses.build
@@ -24,9 +24,6 @@ class EpisodesController < ApplicationController
         new_column.build_category
         4.times do
           new_clue = new_column.clues.build
-          3.times do
-            new_clue.responses.build
-          end
         end
       end
     end
@@ -35,7 +32,7 @@ class EpisodesController < ApplicationController
   def create
     @episode = Episode.new(episode_params)
     set_clue_categories
-    set_response_contestants
+
     if @episode.save
       redirect_to @episode
     else
@@ -45,12 +42,17 @@ class EpisodesController < ApplicationController
 
   def edit
    @episode = Episode.find(params[:id])
+   @contestants = Contestant.all
+   (3 - @episode.appearances.length).times do
+     logger.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+     @episode.appearances.build
+   end
+
   end
 
   def update
     @episode = Episode.find(params[:id])
     set_clue_categories
-
     if @episode.update(episode_params)
       redirect_to @episode
     else
@@ -60,6 +62,11 @@ class EpisodesController < ApplicationController
 
   def show
     @episode = Episode.find(params[:id])
+
+    respond_to do |format|
+      format.html {}
+      format.json { render json: @episode }
+    end
   end
 
   def destroy
@@ -70,20 +77,20 @@ class EpisodesController < ApplicationController
   private
     def episode_params
       params.require(:episode).permit(:title, :season, :episode, :air_date,
-        appearances_attributes: [:contestant_id, :position],
+        appearances_attributes: [:id, :contestant_id, :position],
         boards_attributes: [:id, :round,
           columns_attributes: [:id, :position,
             category_attributes: [:id, :name],
             clues_attributes: [:id, :position, :clue, :correct_response,
                                :pick_order, :dd_wager, :image_url, :note,
                                :answered_by,
-              responses_attributes: [:response, :position]
+              responses_attributes: [:id, :response, :is_correct, :contestant_id]
             ]
           ]
         ],
         final_attributes: [:id, :is_fj, :clue, :correct_response, :image_url,
           :note,
-          responses_attributes: [:response, :position, :is_correct, :wager],
+          responses_attributes: [:id, :response, :position, :is_correct, :wager],
           category_attributes:[:id, :name]
         ]
       )
@@ -98,30 +105,5 @@ class EpisodesController < ApplicationController
         end
       end
     end
-
-  def set_response_contestants
-    @episode.boards.each do |board|
-      board.columns.each do |column|
-        column.clues.each do |clue|
-          # create a new response for the correct answer
-          new_response = clue.responses.build
-          new_response.position = clue.answered_by
-          new_response.response = clue.correct_response
-
-          clue.responses.each do |response|
-            if response.response.nil? || response.response.empty?
-              response.destroy
-            else
-              @episode.appearances.each do |appearance|
-                if response.position = appearance.position
-                  response.contestant = appearance.contestant
-                end
-              end
-            end
-          end
-        end
-      end
-    end
-  end
 
 end

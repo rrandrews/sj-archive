@@ -3,7 +3,7 @@ class Clue < ApplicationRecord
   belongs_to :column, optional: true
   belongs_to :category, optional: true, autosave: true
   accepts_nested_attributes_for :category
-  accepts_nested_attributes_for :responses
+  accepts_nested_attributes_for :responses, allow_destroy: true
 
   attr_accessor :answered_by
 

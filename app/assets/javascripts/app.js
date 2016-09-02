@@ -1,29 +1,37 @@
-var app = angular.module('clues', []);
-var app = angular.module('contestants', ['ngResource', 'ng-rails-csrf']);
+function EpisodeFactory($resource) {
+  var Episode = $resource('/episodes/:id.json');
+  return Episode;
+}
 
-app.controller("ContestantsSearchController", [
-              "$scope",
-      function($scope) {
-        $scope.search = function(searchTerm) {
-          $scope.searchedFor = searchTerm;
-        }
-      }
-]);
+//var jq = $.noConflict();
+var app = angular.module('episodeForm', ['ngResource', 'ng-rails-csrf'])
+                        .factory('Episode', EpisodeFactory);
 
-app.controller("ContestantAddController", [
-              "$scope", "$http", "$window",
-      function($scope, $http, $window) {
+
+app.controller("episodeFormController", [
+              "$scope", "$http", "Episode",
+      function($scope, $http, Episode) {
+
         $scope.contestants = [];
         $scope.getContestants = function() {
             $http.get("/contestants").then(function(data) {
               console.log(data);
               $scope.contestants = data.data;
             }, function(error) {
-              alert('error: ' + error.status);
+              alert('Error retreiving contestants: ' + error.status);
             });
         }
-        $scope.getContestants();
 
+        $scope.episode = [];
+        $scope.getEpisode = function() {
+          $http.get("/episodes").then(function(data) {
+            $scope.episode = data.data;
+          }, function(error) {
+            alert('Error retreiving episode: ' + error.status);
+          });
+        }
+
+        // Create new contestant
         $scope.status = '';
         $scope.add = function(firstName, lastName) {
           $http.post("/contestants.json", {"contestant" : {
@@ -31,7 +39,10 @@ app.controller("ContestantAddController", [
                                                   "last_name" : lastName } }
           ).then(function(response) {
             $scope.status = "Contestant added.";
-            $scope.getContestants();
+            d = response.data;
+            new_item = '<option value="' + d.id + '">' +
+                        d.last_name + ', ' + d.first_name + '</option>';
+            jQuery('.contestants').append(new_item);
           }, function(error) {
             $scope.status = "Failed to add contestant: " + error.status;
           });
@@ -39,16 +50,3 @@ app.controller("ContestantAddController", [
 
       }
 ]);
-
-var ClueSearchController = function($scope, $http) {
-  $scope.search = function(searchTerm) {
-    $http.get("/clues.json", { "params": { "keywords": searchTerm } }
-    ).then(function(response) {
-      $scope.clues = response.data;
-    }, function(response) {
-      alert("There was a problem: " + response.status);
-    });
-  }
-}
-
-app.controller("ClueSearchController", ["$scope", "$http", ClueSearchController]);

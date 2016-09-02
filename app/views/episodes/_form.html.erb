@@ -1,7 +1,7 @@
 
-<div class="form-container" class="form-group ng-cloak" ng-app="contestants"
-                            ng-controller="ContestantAddController">
-
+<div class="form-container" class="form-group ng-cloak" ng-app="episodeForm"
+                            ng-controller="episodeFormController">
+<div class="data" data-id="<%= @episode.id %>"></div>
 <%= render 'modal' %>
 <%= form_for(@episode) do |episode| %>
   <%= render 'shared/error_messages' %>
@@ -18,21 +18,15 @@
   </div>
   <!-- Appearance/contestant -->
   <div class="form-group">
-    <% (0..2).each do |i| %>
-      <label for="episode_appearances_attributes_<%= i %>_Contestant">
-        Contestant <%= i + 1 %> <%= "(left-most)" if i == 0 %>
-      </label>
-      <select class="form-control ng-cloak"
-        name="episode[appearances_attributes][<%= i %>][contestant_id]"
-        id="episode_appearances_attributes_<%= i %>_contestant_id">
-        <option ng-repeat="contestant in contestants" value="{{contestant.id}}">
-          {{contestant.last_name + ', ' + contestant.first_name}}
-        </option>
-      </select>
-      <input type="hidden" value="<%= i + 1 %>"
-             name="episode[appearances_attributes][<%= i %>][position]"
-             id="episode_appearances_attributes_<%= i %>_position">
+    <% appearance_counter = 1 %>
+    <%= episode.fields_for :appearances do |appearance| %>
+      <%= appearance.label "Contestant " + appearance_counter.to_s %>
+      <%= appearance.collection_select :contestant_id, @contestants,
+        :id, :name, {}, class: "contestants", data: {index: appearance_counter} %>
+      <%= appearance.hidden_field :position, value: appearance_counter %>
+      <% appearance_counter += 1 %>
     <% end %>
+
     <div class="seperator"></div>
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
             data-target="#new-contestant">
@@ -63,7 +57,6 @@
         <tbody>
           <% clue_counter = 1 %>
           <%= column.fields_for :clues do |clue| %>
-          <% row_class = clue_counter % 2 == 0 ? '' : 'striped' %>
           <tr><td class="edit-box">
             <div class="form-group">
               <% if @episode.new_record? %>
@@ -77,17 +70,9 @@
               <%= clue.text_field :correct_response, class: 'form-control' %>
             </div>
             <div class="form-group">
-              <%= clue.label "Answered by", class: "inline-block" %>
-              <%= clue.select :answered_by, [1, 2, 3], include_blank: true,
-                              class: 'form-control inline-block' %>
               <%= clue.label "Order", class: "inline-bloack" %>
               <%= clue.number_field :pick_order,
                               class: "inline-block input-narrow" %>
-            </div>
-            <div class="form-group">
-              <a href="#/" class="toggle-hidden" data-target="incorrect">
-                Incorrect
-              </a> |
               <a href="#/" class="toggle-hidden" data-target="note">
                 Note
               </a> |
@@ -102,14 +87,19 @@
               <%= clue.label "DD Wager: " %>
               <%= clue.number_field :dd_wager, class: 'form-control'%>
             </div>
-            <div class="form-group incorrect hidden">
-              <% contestant_counter = 1 %>
-              <%= clue.fields_for :responses do |response| %>
-                <%= response.label "Contestant #{contestant_counter}" %>
+            <div class="form-group incorrect-responses">
+              <%= clue.nested_fields_for :responses do |response| %>
+                <%= response.label :response %>
                 <%= response.text_field :response, class: 'form-control' %>
-                <%= response.hidden_field :position, value: contestant_counter %>
-                <% contestant_counter += 1 %>
+                <%= response.label "Contestant" %>
+                <%= response.select :contestant_id, [1,2,3], {},
+                                    class: 'response-contestant form-control' %>
+                <%= response.check_box :is_correct %>
+                <%= response.label "Is correct" %>
+                <%= response.remove_nested_fields_link 'X',
+                    class: 'btn btn-xs btn-danger pull-right' %>
               <% end %>
+              <%= clue.add_nested_fields_link :responses %>
             </div>
             <div class="form-group note hidden">
               <%= clue.label "Note" %>
@@ -147,24 +137,29 @@
         <%= final.label :correct_response %>
         <%= final.text_field :correct_response, class: 'form-control' %>
       </div>
+
+      <div class="form-group">
+        <%= final.nested_fields_for :responses do |response| %>
+          <%= response.label "Response" %>
+          <%= response.text_field :response, class: 'form-control' %>
+          <%= response.label "Contestant" %>
+          <%= response.select :contestant_id, [1,2,3], {},
+                              class: 'response-contestant form-control' %>
+          <%= response.label :wager %>
+          <%= response.number_field :wager, class: 'form-control' %>
+          <div class="checkbox">
+            <label>
+              <%= response.check_box :is_correct%>
+              Correct
+            </label>
+          </div>
+          <div class="seperator"></div>
+        <% end %>
+        <%= final.add_nested_fields_link :responses %>
+      </div>
       <div class="form-group attachment">
         <%= final.label :image_url %>
         <%= final.text_field :image_url, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <% contestant_counter = 1 %>
-        <%= final.fields_for :responses do |response| %>
-
-          <%= response.label "Contestant #{contestant_counter} Response" %>
-          <%= response.text_field :response, class: 'form-control-static' %>
-          <%= response.label :wager %>
-          <%= response.number_field :wager, class: 'form-control-static' %>
-          <%= response.check_box :is_correct, class: 'form-control-static' %>
-          <%= response.label "Correct" %>
-          <%= response.hidden_field :position, value: contestant_counter %>
-          <div class="seperator"></div>
-          <% contestant_counter += 1 %>
-        <% end %>
       </div>
       <div class="form-group">
         <%= final.label :note %>

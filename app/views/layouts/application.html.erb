@@ -5,9 +5,10 @@
     <%= csrf_meta_tags %>
 
     <script src="https://use.fontawesome.com/8702ac210d.js"></script>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all'%>
+    <%= javascript_include_tag 'application' %>
   <body>
+
   <div class="container-fluid main">
     <%= yield %>
   </div>

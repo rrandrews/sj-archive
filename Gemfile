@@ -8,7 +8,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
-gem 'jquery-turbolinks'
+#gem 'jquery-turbolinks'
+#gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'pg'
 gem 'carrierwave', '~> 0.10.0'
@@ -16,7 +17,7 @@ gem 'mini_magick', '~> 4.3'
 gem 'devise'
 gem 'bower-rails'
 gem 'ng-rails-csrf'
-gem 'turbolinks', '~> 5'
+gem 'nested_form_fields'
 
 group :development, :test do
 # Call 'byebug' anywhere in the code to stop execution and get a debugger console
