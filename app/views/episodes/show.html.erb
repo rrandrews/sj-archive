@@ -20,7 +20,8 @@
           <td class="clue box">
             <table class="clue-table">
               <thead><tr><th class="clue-header">
-                <%= clue_value(clue) %>
+                <%= clue.value %>
+                <span class="pull-right pick-order"><%= clue.pick_order %></span>
               </th></tr></thead>
               <tbody><tr><td class="clue-body">
                 <span class="clue">
@@ -44,8 +45,8 @@
                   <% end %>
                   <% if triple_stumper %>
                     <h4 class="incorrect">Triple Stumper</h4>
+                    <h4><%= clue.correct_response %></h4>
                   <% end %>
-                  <h4><%= clue.correct_response %></h4>
                 </span>
               </td></tr></tbody>
             </table>
@@ -56,15 +57,16 @@
     <div class="seperator"></div>
   <% end %>
   <table class="final">
+    <% final = @episode.final %>
     <thead><th class="category box final">
-      <%= @episode.final.category %>
+      <%= final.category %>
     </th></thead>
     <tbody><td class="clue box final">
       <table class="clue-table">
         <tbody><tr><td class="clue-body">
           <span class="clue">
-            <%= @episode.final.clue %>
-            <% if !@episode.final.image_url.blank? %>
+            <%= final.clue %>
+            <% if !final.image_url.blank? %>
               <a href="<%= final.image_url %>" data-toggle="lightbox"
                 data-title="<%= final.category_name %>"
                 data-footer="<%= final.clue %>" class="image-link">
@@ -72,7 +74,21 @@
               </a>
             <% end %>
           </span>
-          <span class="response hidden"><%= @episode.final.correct_response %></span>
+          <span class="response hidden">
+            <% triple_stumper = true %>
+            <% final.responses.each do |response| %>
+              <% triple_stumper = false if response.is_correct %>
+              <% style = response.is_correct ? 'correct' : 'incorrect' %>
+              <h4 class="<%= style %>">
+                <%= response.contestant.name + ': ' + response.response +
+                  '(' + response.wager.to_s + ')'%>
+              </h4>
+            <% end %>
+            <% if triple_stumper %>
+              <h4 class="incorrect">Triple Stumper</h4>
+            <% end %>
+            <h4><%= final.correct_response %></h4>
+          </span>
         </td></tr></tbody>
       </table>
     </td></tbody>

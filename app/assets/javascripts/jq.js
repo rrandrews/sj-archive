@@ -1,6 +1,18 @@
 $(document).ready(function () {
 
     resetContestants();
+    var lastOrder = 0;
+    $('.order').blur(function() {
+      lastOrder = parseInt($(this).val());
+    });
+
+    $('.clue-edit').focus(function () {
+      nextOrderBox = $(this).parent().next().next().find('.order');
+      if (!nextOrderBox.val()) {
+        lastOrder += 1;
+        nextOrderBox.val(lastOrder);
+      }
+    });
 
     $('.clue.box').click(function() {
       $(this).find(".clue-body").children().toggleClass('hidden');

@@ -63,16 +63,16 @@
                 <%= clue.hidden_field :position, :value => clue_counter %>
               <% end %>
               <%= clue.label "Clue " + (clue_counter * 250 * board_counter).to_s %>
-              <%= clue.text_area :clue, class: 'form-control'%>
+              <%= clue.text_area :clue, class: 'form-control clue-edit'%>
             </div>
             <div class="form-group">
               <%= clue.label :correct_response %>
               <%= clue.text_field :correct_response, class: 'form-control' %>
             </div>
             <div class="form-group">
-              <%= clue.label "Order", class: "inline-bloack" %>
+              <%= clue.label "Order", class: "inline-block" %>
               <%= clue.number_field :pick_order,
-                              class: "inline-block input-narrow" %>
+                              class: "inline-block input-narrow order" %>
               <a href="#/" class="toggle-hidden" data-target="note">
                 Note
               </a> |

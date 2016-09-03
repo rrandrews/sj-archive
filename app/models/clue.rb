@@ -33,7 +33,7 @@ class Clue < ApplicationRecord
       "Final"
     else
       value = position * 250 * column.board.round
-      value = value.to_s + " DD" if is_dd
+      value = value.to_s + " DD " + dd_wager.to_s if !dd_wager.nil?
       value
     end
   end
