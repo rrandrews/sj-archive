@@ -8,6 +8,12 @@
                           data: {confirm: "Are you sure?"}, class: "h4 link" %>
     <% end %>
   </span>
+  <div class="seperator"></div>
+  <ul>
+    <% @episode.contestants.each do |contestant|%>
+        <li><span class="h4"><%= contestant.name %></span>, <%= contestant.note %></li>
+    <% end %>
+  </ul>
   <% @episode.boards.each do |board| %>
     <table class="board"><thead><tr>
       <% board.columns.each do |column| %>
@@ -96,4 +102,7 @@
     </td></tbody>
   </table>
   <div class="seperator"></div>
+  <% @episode.appearances.each do |appearance| %>
+    <%= appearance.contestant.name %> <%= appearance.total %> <br>
+  <% end %>
 </div>

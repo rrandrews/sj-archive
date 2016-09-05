@@ -19,6 +19,7 @@ class ContestantsController < ApplicationController
     @contestant = Contestant.find(params[:id])
     @episodes = []
     Appearance.where("contestant_id = #{params[:id]}").each do |appearance|
+      logger.debug "xxxxxxxxxxxxxx" + appearance.total.to_s
       @episodes.push appearance.episode
     end
 
