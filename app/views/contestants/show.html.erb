@@ -1,10 +1,6 @@
-
 <div class="container fixed-width">
-  <%= render partial: 'search' %>
-  <span class="h1">Episodes
-    <% if user_signed_in? %>
-      <%= link_to "New", new_episode_path, class: "h4 link" %>
-    <% end %>
+  <span class="h1"><%= @contestant.name %>
+    <%= link_to "Index", contestants_path, class: "h4 link" %>
   </span>
   <div class="seperator"></div>
   <section class="episodes-list">

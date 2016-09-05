@@ -15,6 +15,15 @@ class ContestantsController < ApplicationController
     end
   end
 
+  def show
+    @contestant = Contestant.find(params[:id])
+    @episodes = []
+    Appearance.where("contestant_id = #{params[:id]}").each do |appearance|
+      @episodes.push appearance.episode
+    end
+
+  end
+
   def create
     @contestant = Contestant.new(contestant_params)
     logger.debug params

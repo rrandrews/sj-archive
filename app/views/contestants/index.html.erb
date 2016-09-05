@@ -1,0 +1,16 @@
+<div class="container fixed-width">
+  <span class="h1">Contestants</span>
+  <section class="episodes-list">
+    <div class="list-group">
+      <% @contestants.each do |c| %>
+        <%= link_to contestant_path(c),
+          class: 'list-group-item list-group-item-action' do %>
+          <span class="h4"><%= c.last_name %>, <%= c.first_name %></span>
+          <span class="pull-right"><%= c.note %></span>
+        <% end %>
+
+      <% end %>
+    </div>
+  </section>
+  <%= render partial: 'shared/footer' %>
+</div>

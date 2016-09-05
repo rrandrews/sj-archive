@@ -41,8 +41,10 @@ class EpisodesController < ApplicationController
     set_clue_categories
 
     if @episode.save
+      flash[:success] = "Episode successfully created."
       redirect_to @episode
     else
+      @contestants = Contestant.order(:last_name)
       render 'new'
     end
   end
@@ -61,8 +63,10 @@ class EpisodesController < ApplicationController
     @episode.owner = current_user
     set_clue_categories
     if @episode.update(episode_params)
+      flash[:success] = "Episode updated successfully."
       redirect_to @episode
     else
+      @contestants = Contestant.order(:last_name)
       render 'edit'
     end
   end
@@ -77,8 +81,12 @@ class EpisodesController < ApplicationController
   end
 
   def destroy
-    Episode.find(params[:id]).destroy
-    redirect_to episodes_url
+    if Episode.find(params[:id]).destroy
+      flash[:success] = "Episode destroyed successfully."
+      redirect_to episodes_url
+    else
+      flash[:danger] = "Unable to destroy episode."
+    end
   end
 
   private
