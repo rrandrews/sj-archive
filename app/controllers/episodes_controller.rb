@@ -100,7 +100,8 @@ class EpisodesController < ApplicationController
             clues_attributes: [:id, :position, :clue, :correct_response,
                                :pick_order, :dd_wager, :image_url, :note,
                                :answered_by,
-              responses_attributes: [:id, :response, :is_correct, :contestant_id]
+              responses_attributes: [:id, :response, :is_correct,
+                                     :contestant_id, :_destroy]
             ]
           ]
         ],
