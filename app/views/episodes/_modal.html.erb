@@ -16,10 +16,15 @@
           <input type="text" name="last_name" class="form-control"
                  ng-model="last_name">
         </div>
+        <div class="input-group">
+          <label for="note">Notes</label>
+          <textarea rows="3" name="note" class="form-control"
+                 ng-model="note"></textarea>
+        </div>
         <div class="seperator"></div>
         <span class="input-group-btn">
           <button class="btn btn-primary" type="button"
-                  ng-click="add(first_name, last_name)">
+                  ng-click="add(first_name, last_name, note)">
             Create Contestant
           </button>
         </span>

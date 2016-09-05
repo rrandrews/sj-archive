@@ -108,7 +108,7 @@ class EpisodesController < ApplicationController
         final_attributes: [:id, :is_fj, :clue, :correct_response, :image_url,
           :note,
           responses_attributes: [:id, :contestant_id, :response, :position,
-                                 :is_correct, :wager],
+                                 :is_correct, :wager, :_destroy],
           category_attributes:[:id, :name]
         ]
       )

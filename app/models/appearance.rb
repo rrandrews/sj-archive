@@ -7,7 +7,9 @@ class Appearance < ApplicationRecord
       .where("episode_id = #{episode.id} AND contestant_id = #{contestant.id}")
     total = 0
     final = episode.final.responses.find_by(contestant_id: contestant.id)
-    total += final.is_correct ? final.wager : -(final.wager)
+    unless final.is_correct.nil? || final.wager.nil?
+      total += final.is_correct ? final.wager : -(final.wager)
+    end
 
     responses.each do |response|
       if response.clue.dd_wager && response.clue.dd_wager > 0

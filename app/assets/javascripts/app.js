@@ -31,10 +31,11 @@ app.controller("episodeFormController", [
 
         // Create new contestant
         $scope.status = '';
-        $scope.add = function(firstName, lastName) {
+        $scope.add = function(firstName, lastName, note) {
           $http.post("/contestants.json", {"contestant" : {
                                                   "first_name": firstName,
-                                                  "last_name" : lastName } }
+                                                  "last_name" : lastName, 
+                                                  "note" : note } }
           ).then(function(response) {
             $scope.status = "Contestant added.";
             d = response.data;
