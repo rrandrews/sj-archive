@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830214236) do
+ActiveRecord::Schema.define(version: 20160904164127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,8 @@ ActiveRecord::Schema.define(version: 20160830214236) do
     t.integer  "episode"
     t.string   "title"
     t.integer  "final_id"
+    t.boolean  "is_public"
+    t.integer  "owner_id"
     t.index ["final_id"], name: "index_episodes_on_final_id", using: :btree
   end
 
@@ -100,18 +102,19 @@ ActiveRecord::Schema.define(version: 20160830214236) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.boolean  "admin",                  default: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
@@ -124,6 +127,7 @@ ActiveRecord::Schema.define(version: 20160830214236) do
   add_foreign_key "columns", "boards"
   add_foreign_key "columns", "categories"
   add_foreign_key "episodes", "clues", column: "final_id"
+  add_foreign_key "episodes", "users", column: "owner_id"
   add_foreign_key "responses", "clues"
   add_foreign_key "responses", "contestants"
 end

@@ -2,9 +2,11 @@
   <h3><%= @episode.air_date %></h3>
   <span class="h1"><%= @episode.title %>
     <%= link_to "Index", episodes_path, class: "h4 link" %>
-    <%= link_to "Edit", edit_episode_path(@episode), class: "h4 link" %>
-    <%= link_to "Delete", episode_path(@episode), method: :delete,
-                        data: {confirm: "Are you sure?"}, class: "h4 link" %>
+    <% if user_signed_in? && owner_or_admin(@episode.owner) %>
+      <%= link_to "Edit", edit_episode_path(@episode), class: "h4 link" %>
+      <%= link_to "Delete", episode_path(@episode), method: :delete,
+                          data: {confirm: "Are you sure?"}, class: "h4 link" %>
+    <% end %>
   </span>
   <% @episode.boards.each do |board| %>
     <table class="board"><thead><tr>

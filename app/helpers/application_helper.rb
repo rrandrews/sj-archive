@@ -10,6 +10,10 @@ module ApplicationHelper
         end
       end
 
+      def owner_or_admin(owner)
+        current_user == owner || current_user.admin
+      end
+
       def leading_zero(number)
         number = 0 if number.nil?
         number = '0' + number.to_s if number < 10

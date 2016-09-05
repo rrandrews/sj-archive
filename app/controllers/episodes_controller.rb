@@ -1,12 +1,18 @@
 class EpisodesController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :destroy, :new]
+
+  before_action :require_perimission, only: [:edit, :destroy, :update]
 
   def index
-    @episodes = Episode.order(:air_date)
+    if user_signed_in?
+      @episodes = Episode.where("owner_id = #{current_user.id} OR " +
+                                "is_public = true").order(:air_date)
+    else
+      @episodes = Episode.where(is_public: true).order(:air_date)
+    end
   end
 
   def new
-    @contestants = Contestant.all
+    @contestants = Contestant.order(:last_name)
     @episode = Episode.new
     3.times do
       @episode.appearances.build
@@ -31,6 +37,7 @@ class EpisodesController < ApplicationController
 
   def create
     @episode = Episode.new(episode_params)
+    @episode.owner = current_user
     set_clue_categories
 
     if @episode.save
@@ -42,9 +49,8 @@ class EpisodesController < ApplicationController
 
   def edit
    @episode = Episode.find(params[:id])
-   @contestants = Contestant.all
+   @contestants = Contestant.order(:last_name)
    (3 - @episode.appearances.length).times do
-     logger.debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
      @episode.appearances.build
    end
 
@@ -52,6 +58,7 @@ class EpisodesController < ApplicationController
 
   def update
     @episode = Episode.find(params[:id])
+    @episode.owner = current_user
     set_clue_categories
     if @episode.update(episode_params)
       redirect_to @episode
@@ -77,6 +84,7 @@ class EpisodesController < ApplicationController
   private
     def episode_params
       params.require(:episode).permit(:title, :season, :episode, :air_date,
+        :is_public,
         appearances_attributes: [:id, :contestant_id, :position],
         boards_attributes: [:id, :round,
           columns_attributes: [:id, :position,
@@ -95,6 +103,12 @@ class EpisodesController < ApplicationController
           category_attributes:[:id, :name]
         ]
       )
+    end
+
+    def require_perimission
+      unless view_context.owner_or_admin(Episode.find(params[:id]).owner)
+        redirect_to root_path
+      end
     end
 
     def set_clue_categories

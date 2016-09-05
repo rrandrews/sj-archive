@@ -2,18 +2,25 @@
 <div class="container fixed-width">
   <%= render partial: 'search' %>
   <span class="h1">Episodes
-    <%= link_to "New", new_episode_path, class: "h4 link" %>
+    <% if user_signed_in? %>
+      <%= link_to "New", new_episode_path, class: "h4 link" %>
+    <% end %>
   </span>
-  <div class="episodes-list">
+  <section class="episodes-list">
     <div class="list-group">
       <% @episodes.each do |episode| %>
+        <% item_class = episode.is_public ? "public-item" : "private-item" %>
         <%= link_to episode_path(episode),
-          class: 'list-group-item list-group-item-action' do%>
+          class: item_class + ' list-group-item list-group-item-action' do%>
+          <% unless episode.is_public %>
+            <em>Private </em>
+          <% end %>
           S<%= episode.season %>E<%= leading_zero(episode.episode)%>
           <%= episode.title %>
           <span class="pull-right"><%= episode.air_date %></span>
         <% end %>
       <% end %>
     </div>
-  </div>
+  </section>
+  <%= render partial: 'shared/footer' %>
 </div>

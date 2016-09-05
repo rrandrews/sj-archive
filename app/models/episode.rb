@@ -4,6 +4,7 @@ class Episode < ApplicationRecord
   has_many :contestants, through: :appearances
   belongs_to :final, class_name: 'Clue', foreign_key: 'final_id',
              dependent: :destroy
+  belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
   accepts_nested_attributes_for :contestants
   accepts_nested_attributes_for :appearances
   accepts_nested_attributes_for :boards

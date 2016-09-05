@@ -1,0 +1,30 @@
+<nav class="navbar navbar-default">
+  <div class="container fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed"
+        data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">sj-a</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="collapse">
+      <ul class="nav navbar-nav">
+        <li><%= current_user.email %></li>
+      </ul>
+      <%= form_for :clues, url: clues_path, method: :get,
+                   html: {class: "navbar-form navbar-right"} do |f| %>
+        <div class="input-group">
+          <%= label_tag :keywords, nil, class: "sr-only" %>
+          <%= text_field_tag :keywords, nil, class: "form-control search-sm pull-right" %>
+          <span class="input-group-btn">
+            <%= submit_tag "Search", class: "btn btn-primary pull-right" %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</nav>

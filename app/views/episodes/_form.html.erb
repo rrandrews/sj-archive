@@ -4,6 +4,10 @@
 <div class="data" data-id="<%= @episode.id %>"></div>
 <%= render 'modal' %>
 <%= form_for(@episode) do |episode| %>
+  <% contestants = [] %>
+  <% @episode.appearances.each do |appearance| %>
+    <% contestants.push(appearance.contestant_id) %>
+  <% end %>
   <%= render 'shared/error_messages' %>
   <!-- Episode attributes -->
   <div class="form-group">
@@ -92,8 +96,9 @@
                 <%= response.label :response %>
                 <%= response.text_field :response, class: 'form-control' %>
                 <%= response.label "Contestant" %>
-                <%= response.select :contestant_id, [1,2,3], {},
-                                    class: 'response-contestant form-control' %>
+
+                <%= response.select :contestant_id, contestants, {},
+                                    class: 'response-contestant form-control'%>
                 <%= response.check_box :is_correct %>
                 <%= response.label "Is correct" %>
                 <%= response.remove_nested_fields_link 'X',
@@ -143,7 +148,7 @@
           <%= response.label "Response" %>
           <%= response.text_field :response, class: 'form-control' %>
           <%= response.label "Contestant" %>
-          <%= response.select :contestant_id, [1,2,3], {},
+          <%= response.select :contestant_id, contestants, {},
                               class: 'response-contestant form-control' %>
           <%= response.label :wager %>
           <%= response.number_field :wager, class: 'form-control' %>
@@ -167,7 +172,8 @@
       </div>
 
     <% end %>
-
+    <%= episode.check_box :is_public %>
+    <%= episode.label :is_public %>
     <%= episode.submit "Save", class: "btn btn-primary" %>
   </section>
 <% end %>

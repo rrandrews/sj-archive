@@ -55,8 +55,8 @@ $(document).ready(function () {
     function resetContestants () {
       $('.response-contestant').each(function() {
         for (i = 0; i < 3; i++) {
-          $(this).children().eq(i).val($('.contestants').children().eq(i).val());
-          $(this).children().eq(i).text($('.contestants').children().eq(i).text());
+          $(this).children().eq(i).val($('.contestants').eq(i).val());
+          $(this).children().eq(i).text($('.contestants option:selected').eq(i).text());
         }
       })
     }
