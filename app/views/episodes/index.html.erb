@@ -5,6 +5,7 @@
     <% if user_signed_in? %>
       <%= link_to "New", new_episode_path, class: "h4 link" %>
     <% end %>
+    <%= link_to "Contestants", contestants_path, class: "h4 link" %>
   </span>
   <div class="seperator"></div>
   <section class="episodes-list">

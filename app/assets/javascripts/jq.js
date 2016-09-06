@@ -10,6 +10,7 @@ $(document).ready(function () {
       nextOrderBox = $(this).parent().next().next().find('.order');
       if (!nextOrderBox.val()) {
         lastOrder += 1;
+        if (lastOrder > 24) lastOrder = 1;
         nextOrderBox.val(lastOrder);
       }
     });

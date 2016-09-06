@@ -1,5 +1,8 @@
 <div class="container fixed-width">
-  <span class="h1">Contestants</span>
+  <%= render partial: 'shared/search' %>
+  <span class="h1">Contestants
+    <%= link_to "Episodes", episodes_path, class: "h4 link" %>
+  </span>
   <section class="episodes-list">
     <div class="list-group">
       <% @contestants.each do |c| %>
