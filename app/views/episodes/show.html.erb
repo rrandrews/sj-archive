@@ -17,7 +17,7 @@
     <% end %>
   </ul>
   <% @episode.boards.each do |board| %>
-    <table class="board"><thead><tr>
+    <table class="board full-round"><thead><tr>
       <% board.columns.each do |column| %>
         <th class="category box"><%= column.category.name %></th>
       <% end %>
@@ -44,6 +44,7 @@
                     </a>
                   <% end %>
                 </span>
+
                 <span class="response hidden">
                   <% triple_stumper = true %>
                   <% clue.responses.each do |response| %>
@@ -66,7 +67,7 @@
     </table>
     <div class="seperator"></div>
   <% end %>
-  <table class="final">
+  <table class="final board">
     <% final = @episode.final %>
     <thead><th class="category box final">
       <%= final.category %>
