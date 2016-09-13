@@ -15,8 +15,18 @@ $(document).ready(function () {
       }
     });
 
-    $('.clue.box').click(function() {
-      $(this).find(".clue-body").children().toggleClass('hidden');
+    // $('.clue-body').click(function() {
+    //   $(this).children().toggleClass('hidden');
+    // });
+
+    $('th.value').click(function() {
+      $(this).closest('table').find('.clue-body').children()
+                                                 .toggleClass('hidden');
+    });
+
+    $('.category.box.final').click(function() {
+      $(this).closest('table').find('.clue-body').children()
+                                                 .toggleClass('hidden');
     });
 
     $('.toggle-hidden').click(function(event) {

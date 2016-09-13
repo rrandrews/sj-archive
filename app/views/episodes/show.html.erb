@@ -17,7 +17,7 @@
     <% end %>
   </ul>
   <% @episode.boards.each do |board| %>
-    <table class="board full-round"><thead><tr>
+    <table class="board"><thead><tr>
       <% board.columns.each do |column| %>
         <th class="category box"><%= column.category.name %></th>
       <% end %>
@@ -27,15 +27,10 @@
         <tr><% board.columns.each do |column| %>
           <% clues = column.clues.order(:position) %>
           <% clue = clues[i] %>
-          <td class="clue box">
+          <td class="clue box board">
             <table class="clue-table">
-              <thead><tr><th class="clue-header">
-                <%= clue.value %>
-                <span class="pull-right pick-order"><%= clue.pick_order %></span>
-              </th></tr></thead>
-              <tbody><tr><td class="clue-body">
-                <span class="clue">
-                  <%= clue.clue %>
+              <thead><tr class="clue-header">
+                <th class="image-link">
                   <% if !clue.image_url.blank? %>
                     <a href="<%= clue.image_url %>" data-toggle="lightbox"
                       data-title="<%= clue.category_name %>"
@@ -43,22 +38,32 @@
                       <i class="fa fa-picture-o" aria-hidden="true"></i>
                     </a>
                   <% end %>
-                </span>
-
-                <span class="response hidden">
+                </th>
+                <th class="value">
+                  <%= clue.value %>
+                </th>
+                <th class="pick-order">
+                  <%= clue.pick_order %>
+                </th>
+              </tr></thead>
+              <tbody><tr><td class="clue-body" colspan="3">
+                <div class="clue">
+                  <%= clue.clue %>
+                </div>
+                <div class="response hidden">
                   <% triple_stumper = true %>
                   <% clue.responses.each do |response| %>
                     <% triple_stumper = false if response.is_correct %>
                     <% style = response.is_correct ? 'correct' : 'incorrect' %>
-                    <h4 class="<%= style %>">
+                    <span class="<%= style %>">
                       <%= response.contestant.name + ': ' + response.response %>
-                    </h4>
+                    </span>
                   <% end %>
                   <% if triple_stumper %>
-                    <h4 class="incorrect">Triple Stumper</h4>
-                    <h4><%= clue.correct_response %></h4>
+                    <span class="incorrect">Triple Stumper</span>
+                    <span class="correct"><%= clue.correct_response %></span>
                   <% end %>
-                </span>
+                </div>
               </td></tr></tbody>
             </table>
           </td>
@@ -67,7 +72,7 @@
     </table>
     <div class="seperator"></div>
   <% end %>
-  <table class="final board">
+  <table class="final">
     <% final = @episode.final %>
     <thead><th class="category box final">
       <%= final.category %>
@@ -105,7 +110,12 @@
     </td></tbody>
   </table>
   <div class="seperator"></div>
-  <% @episode.appearances.each do |appearance| %>
-    <%= appearance.contestant.name %> <%= appearance.total %> <br>
-  <% end %>
+  <h3>Final scores</h3>
+  <ul>
+    <% @episode.appearances.each do |a|%>
+        <li><span class="h4">
+          <%= link_to a.contestant.name, contestant_path(a.contestant) %></span>: 
+          <%= a.total %></li>
+    <% end %>
+  </ul>
 </div>

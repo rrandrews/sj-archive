@@ -21,39 +21,17 @@ body {
   margin-top: 20px;
 }
 
-.form-container {
-  width: 1420px;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 .seperator {
   display: block;
   height: 10px;
 }
-.edit-board {
-  display: block;
-}
 
-.edit-column {
-  display: inline;
-}
 .inline-block {
   display: inline-block;
 }
 
-.input-narrow {
-  width: 40px;
-}
-.box {
-  color: white;
-  padding: 4px;
-  max-width: 220px;
-  overflow: hidden;
-  text-align: center;
-  vertical-align: top;
-  border: 3px solid black;
-}
+
 
 .games-list {
   margin-top: 5px;
@@ -66,19 +44,12 @@ body {
   border-bottom: 2px solid grey;
 }
 
-.response {
-  color: rgb(101, 255, 0);
-}
 
 .text {
   vertical-align: middle;
 }
 .main {
   width: 100%;
-}
-
-.category-header {
-  width: 200px;
 }
 
 .clear-both {
@@ -95,30 +66,17 @@ body {
   margin-right: auto;
 }
 
-.correct {
-  color: #65ff00;
-}
 
-.incorrect {
-  color: red;
-}
+
 .fa-picture-o {
   margin-right: 4px;
 }
 
-.image-link {
-  color: white;
-  vertical-align: bottom;
-}
 
-.value {
+
+.value-results {
   font-size: 14px;
   font-style: italic;
-}
-
-.pick-order {
-  color: white;
-  font-size: 80%;
 }
 
 .private-item {
@@ -138,4 +96,8 @@ body {
 
 #new-contestant {
   z-index: 1500;
+}
+
+.response-results {
+  color: #5cb85c;
 }
