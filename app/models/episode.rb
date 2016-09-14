@@ -16,4 +16,7 @@ class Episode < ApplicationRecord
     contestant = appearances.find_by(position: position)
   end
 
+  def is_new?
+    (Time.now - created_at < 604800) ? true : false
+  end
 end

@@ -1,5 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 
 html {
   -webkit-box-sizing: border-box;
@@ -100,4 +102,11 @@ body {
 
 .response-results {
   color: #5cb85c;
+}
+
+.new-episode {
+  font-style: italic;
+  font-size: .8em;
+  margin-left: 1em;
+  color: #337ab7;
 }

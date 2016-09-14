@@ -19,6 +19,9 @@
           <% end %>
           S<%= episode.season %>E<%= leading_zero(episode.episode)%>
           <%= episode.title %>
+          <% if episode.is_new? %>
+            <span class="new-episode">New</span>
+          <% end %>
           <span class="pull-right"><%= episode.air_date %></span>
         <% end %>
       <% end %>

@@ -18,16 +18,25 @@ gem 'devise'
 gem 'bower-rails'
 gem 'ng-rails-csrf'
 gem 'nested_form_fields'
+gem 'font-awesome-sass'
 
 group :development, :test do
-# Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
-group :development do  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+group :development do # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
   gem 'guard'
   gem 'guard-livereload', '~> 2.5', require: false
+end
+
+group :test do
+  gem 'faker'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'launchy'
 end
 
 
