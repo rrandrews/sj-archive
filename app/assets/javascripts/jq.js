@@ -1,44 +1,66 @@
-$(document).ready(function () {
+var sjUI = {
 
-    resetContestants();
-    var lastOrder = 0;
-    $('.order').blur(function() {
-      lastOrder = parseInt($(this).val());
-    });
+  init: function() {
+    $('.order').blur(sjUI.updateOrder);
+    $('.clue-edit').click(sjUI.autofillOrder);
+    $(sjUI.toggler).click(sjUI.toggle);
+  },
 
-    $('.clue-edit').focus(function () {
-      nextOrderBox = $(this).parent().next().next().find('.order');
-      if (!nextOrderBox.val()) {
-        lastOrder += 1;
-        if (lastOrder > 24) lastOrder = 1;
-        nextOrderBox.val(lastOrder);
+  container: '.toggle-container',
+  toggler: '.toggler',
+  togglee: '.togglee',
+  classToToggle: 'hidden',
+
+  // Toggles toggle_class for all togglee elements in container class.
+  // If data-target is present, the collection of togglees is narrowed to allow
+  // for multiple indepentent togglers in one container.
+  toggle: function() {
+      var togglee = sjUI.togglee;
+      if ($(this).data('target')) {
+        togglee += '.' + $(this).data('target');
       }
-    });
+      var togglees = $(this).closest(sjUI.container).find(togglee);
+      togglees.toggleClass(sjUI.classToToggle);
+  },
 
-    // $('.clue-body').click(function() {
-    //   $(this).children().toggleClass('hidden');
+  lastOrder: 0,
+
+  // Autofill order box when moving to a new clue in editor
+  autofillOrder: function() {
+    var nextOrderBox = $(this).closest('.edit-box').find('.order');
+    console.log(nextOrderBox);
+    if (!nextOrderBox.val()) {
+      sjUI.lastOrder += 1;
+      if (sjUI.lastOrder > 24) sjUI.lastorder = 1;
+      nextOrderBox.val(sjUI.lastOrder);
+    }
+  },
+  // update order for autofill if order manually changed
+  updateOrder: function() {
+    sjUI.lastOrder = parseInt($(this).val());
+  }
+
+};
+
+$(document).ready(function () {
+    resetContestants();
+    // var lastOrder = 0;
+    // $('.order').blur(function() {
+    //   lastOrder = parseInt($(this).val());
     // });
 
-    $('th.value').click(function() {
-      $(this).closest('table').find('.clue-body').children()
-                                                 .toggleClass('hidden');
-    });
+    // $('.clue-edit').focus(function () {
+    //   nextOrderBox = $(this).parent().next().next().find('.order');
+    //   if (!nextOrderBox.val()) {
+    //     lastOrder += 1;
+    //     if (lastOrder > 24) lastOrder = 1;
+    //     nextOrderBox.val(lastOrder);
+    //   }
+    // });+
 
-    $('.category.box.final').click(function() {
-      $(this).closest('table').find('.clue-body').children()
-                                                 .toggleClass('hidden');
-    });
+    // $('.toggler').click(sjUI.toggle);
 
-    $('.toggle-hidden').click(function(event) {
-      target = "." + $(this).data("target");
-      $(this).parent().parent().children(target).toggleClass('hidden');
-      event.preventDefault();
-    });
-
-    $('.show-response').click(function(event) {
-      $(this).next().toggleClass('hidden');
-      event.preventDefault();
-    })
+    sjUI.init();
 
     $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
         event.preventDefault();

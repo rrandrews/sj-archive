@@ -26,12 +26,12 @@
               <%= link_to clue.episode.air_date.to_s, episode_path(clue.episode) %>
             </span>
           </h4>
-          <span class="clue-result">
+          <span class="clue-result toggle-container">
             <%= clue.clue %>
-            <a href="#/" class="show-response">
+            <a href="#/" class="show-response toggler">
               <i class="fa fa-chevron-circle-right"></i>
             </a>
-            <span class='response-results hidden'><%= clue.correct_response %></span>
+            <span class='response-results togglee hidden'><%= clue.correct_response %></span>
           </span>
         </div>
       <% end %>

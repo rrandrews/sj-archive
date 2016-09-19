@@ -28,7 +28,7 @@
           <% clues = column.clues.order(:position) %>
           <% clue = clues[i] %>
           <td class="clue box board">
-            <table class="clue-table">
+            <table class="clue-table toggle-container">
               <thead><tr class="clue-header">
                 <th class="image-link">
                   <% if !clue.image_url.blank? %>
@@ -39,7 +39,7 @@
                     </a>
                   <% end %>
                 </th>
-                <th class="value">
+                <th class="value toggler">
                   <%= clue.value %>
                 </th>
                 <th class="pick-order">
@@ -47,16 +47,17 @@
                 </th>
               </tr></thead>
               <tbody><tr><td class="clue-body" colspan="3">
-                <div class="clue">
+                <div class="clue togglee">
                   <%= clue.clue %>
                 </div>
-                <div class="response hidden">
+                <div class="response togglee hidden">
                   <% triple_stumper = true %>
                   <% clue.responses.each do |response| %>
                     <% triple_stumper = false if response.is_correct %>
                     <% style = response.is_correct ? 'correct' : 'incorrect' %>
                     <span class="<%= style %>">
-                      <%= response.contestant.name + ': ' + response.response %>
+                      <%= response.contestant.name + ': ' + 
+                                                      response.find_response %>
                     </span>
                   <% end %>
                   <% if triple_stumper %>
@@ -72,15 +73,15 @@
     </table>
     <div class="seperator"></div>
   <% end %>
-  <table class="final">
+  <table class="final toggle-container">
     <% final = @episode.final %>
-    <thead><th class="category box final">
+    <thead><th class="category box final toggler">
       <%= final.category %>
     </th></thead>
     <tbody><td class="clue box final">
       <table class="clue-table">
         <tbody><tr><td class="clue-body">
-          <span class="clue">
+          <span class="clue togglee">
             <%= final.clue %>
             <% if !final.image_url.blank? %>
               <a href="<%= final.image_url %>" data-toggle="lightbox"
@@ -90,7 +91,7 @@
               </a>
             <% end %>
           </span>
-          <span class="response hidden">
+          <span class="response togglee hidden">
             <% triple_stumper = true %>
             <% final.responses.each do |response| %>
               <% triple_stumper = false if response.is_correct %>

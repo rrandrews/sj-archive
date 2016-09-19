@@ -61,7 +61,7 @@
         <tbody>
           <% clue_counter = 1 %>
           <%= column.fields_for :clues do |clue| %>
-          <tr><td class="edit-box">
+          <tr><td class="edit-box toggle-container">
             <div class="form-group">
               <% if @episode.new_record? %>
                 <%= clue.hidden_field :position, :value => clue_counter %>
@@ -77,17 +77,17 @@
               <%= clue.label "Order", class: "inline-block" %>
               <%= clue.number_field :pick_order,
                               class: "inline-block input-narrow order" %>
-              <a href="#/" class="toggle-hidden" data-target="note">
+              <a href="#/" class="toggle-hidden toggler" data-target="note">
                 Note
               </a> |
-              <a href="#/" class="toggle-hidden" data-target="daily-double">
+              <a href="#/" class="toggle-hidden toggler" data-target="daily-double">
                 DD
               </a> |
-              <a href="#/" class="toggle-hidden" data-target="attachment">
+              <a href="#/" class="toggle-hidden toggler" data-target="attachment">
                 <i class="fa fa-picture-o" aria-hidden="true"></i>
               </a>
             </div>
-            <div class="form-group daily-double hidden">
+            <div class="form-group daily-double togglee hidden">
               <%= clue.label "DD Wager: " %>
               <%= clue.number_field :dd_wager, class: 'form-control'%>
             </div>
@@ -106,11 +106,11 @@
               <% end %>
               <%= clue.add_nested_fields_link :responses %>
             </div>
-            <div class="form-group note hidden">
+            <div class="form-group note togglee hidden">
               <%= clue.label "Note" %>
               <%= clue.text_field :note, class: 'form-control' %>
             </div>
-            <div class="form-group attachment hidden">
+            <div class="form-group attachment togglee hidden">
               <%= clue.label :image_url %>
               <%= clue.text_field :image_url, class: 'form-control' %>
             </div>

@@ -4,7 +4,7 @@ class Response < ApplicationRecord
 
   attr_accessor :position
 
-  def response
+  def find_response
     if (self[:response].nil? || self[:response].empty?) && is_correct
       clue.correct_response
     else
